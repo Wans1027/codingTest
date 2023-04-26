@@ -5,44 +5,42 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class CuttingTree {
-    private static int N;
-    private static int M;
+    private static int n,m;
     private static int[] trees;
     private static long max = 0;
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
+        m = sc.nextInt();
 
-        N = scanner.nextInt();
-        M = scanner.nextInt();
+        trees = new int[n];
 
-        trees = new int[N + 1];
-
-        for (int i = 1; i <= N; i++) {
-            trees[i] = scanner.nextInt();
+        for (int i = 0; i < n; i++) {
+            trees[i] = sc.nextInt();
             max = Math.max(max, trees[i]);
         }
 
         long start = 0;
         long end = max;
 
-        while (start <= end) {
-            long mid = (start + end) / 2;
+        while(start<=end){
+            long mid = (start+end)/2;
             long sum = 0;
 
             for (int tree : trees) {
-                if (tree > mid) {
+                if(tree > mid){
                     sum += tree - mid;
                 }
             }
 
-            if (sum >= M) {
+            if (sum >= m) {
                 start = mid + 1;
-            } else {
+            }
+            else{
                 end = mid - 1;
             }
         }
-    ///
         System.out.println(end);
     }
 }
