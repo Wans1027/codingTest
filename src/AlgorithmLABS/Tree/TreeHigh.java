@@ -4,7 +4,7 @@ import java.sql.Array;
 import java.util.*;
 
 public class TreeHigh {
-    static List<Integer>[] nodes;
+    static int[][] nodes;
     static boolean[] visited;
     static int n;
     static int startNode;
@@ -14,40 +14,33 @@ public class TreeHigh {
         startNode = sc.nextInt();
         sc.nextLine();
 
-        nodes = new ArrayList[n];
-        for (int i = 0; i < n; i++) {
-            nodes[i] = new ArrayList<>();
-        }
-        for (int i = 0; i < n-1; i++) {
+        nodes = new int[n][n];
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < n - 1; i++) {
             int a = sc.nextInt();
             int b = sc.nextInt();
 
-            nodes[a].add(b);
+            nodes[b][a] = 1;
         }
 
-        List<Integer> result = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             visited = new boolean[n];
             cnt = 0;
-            getDistance(i);
-            //System.out.println(cnt);
+            dfs(i);
+            //System.out.print(cnt+" ");
             result.add(cnt);
         }
-        Integer max = Collections.max(result);
-        System.out.println(max);
+        System.out.println(Collections.max(result));
+
     }
     static int cnt = 0;
-    private static void getDistance(int x) {
-        if (x == startNode) {
-            return;
-        }
-        if(!visited[x]) cnt++;
-        visited[x] = true;
+    private static void dfs(int v) {
+        if(v == startNode) return;
+        visited[v] = true;
+        cnt ++;
         for (int i = 0; i < n; i++) {
-            for (Integer integer : nodes[i]) {
-                if (x == integer) {
-                    getDistance(i);
-                }
+            if (nodes[v][i] == 1 && !visited[i]) {
+                dfs(i);
             }
         }
     }
