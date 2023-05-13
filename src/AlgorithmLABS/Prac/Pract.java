@@ -1,9 +1,6 @@
 package AlgorithmLABS.Prac;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Pract {
     static int[][] map;
@@ -32,6 +29,7 @@ public class Pract {
             }
         }
         System.out.println(result.size());
+        Collections.sort(result);
         for (Integer i : result) {
             System.out.println(i);
         }
