@@ -3,64 +3,60 @@ package AlgorithmLABS.Prac;
 import java.util.*;
 
 public class Pract {
+    //Search Maze
+    // BFS를 이용한 최단 거리 경로 계산
+
+    static int[][] visited;
     static int[][] map;
-    static boolean[][] visited;
+    static Queue<int[]> q = new LinkedList<>();
     static int n;
-    static int cnt = 0;
+    static int m;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
+        m = sc.nextInt();
         sc.nextLine();
-        map = new int[n][n];
-        visited = new boolean[n][n];
-        for (int i = 0; i < n; i++) {
-            map[i] = Arrays.stream(sc.nextLine().split("")).mapToInt(Integer::parseInt).toArray();
-        }
 
+        map = new int[n][m];
+        visited = new int[n][m];
 
-        List<Integer> result = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (!visited[i][j] && map[i][j] == 1) {
-                    cnt = 0;
-                    getSt(i,j);
-                    result.add(cnt);
-                }
+            for (int j = 0; j < m; j++) {
+                map[i][j] = sc.nextInt();
+                visited[i][j] = Integer.MAX_VALUE;
             }
         }
-        System.out.println(result.size());
-        Collections.sort(result);
-        for (Integer i : result) {
-            System.out.println(i);
-        }
 
+        bfsSearch(n-1,0,0);
     }
-    static int[][] direction;
 
-    private static void getSt(int x, int y) {
-        visited[x][y] = true;
+    private static void bfsSearch(int x, int y, int cnt) {
 
-        // 오른쪽 또는 아래쪽
-        if (map[x][y] == 0) {
-            return;
-        }
-        cnt++;
+        q.add(new int[]{x, y, cnt});
 
-
-        direction = new int[][]{{x,y-1},{x+1,y},{x-1,y},{x,y+1}};
-
-        for (int[] dir : direction) {
-            int a = dir[0];
-            int b = dir[1];
+        while (!q.isEmpty()) {
+            int[] poll = q.poll();
+            x = poll[0];
+            y = poll[1];
+            cnt = poll[2];
             try {
-                if (!visited[a][b]) {
-                    getSt(a, b);
+                if (map[x][y] != 1) {
+
+                    if (cnt < visited[x][y]) {
+                        visited[x][y] = cnt;
+                    }else continue;
+                    cnt++;
+                    q.add(new int[]{x, y + 1, cnt});
+                    q.add(new int[]{x, y - 1, cnt});
+                    q.add(new int[]{x + 1, y, cnt});
+                    q.add(new int[]{x - 1, y, cnt});
                 }
             } catch (Exception e) {
                 continue;
             }
-
         }
+        System.out.println(visited[0][m-1]);
     }
 
 
