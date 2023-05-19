@@ -8,7 +8,7 @@ public class NQeen {
         int n = sc.nextInt();
         int[][] map = new int[n][n];
 
-        queen();
+        //queen();
     }
 
     private static void queen(int x, int y) {
