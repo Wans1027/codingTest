@@ -6,31 +6,32 @@ public class Division {
 
     static int n;
     static int[] result;
+    static int cnt;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        cnt = 0;
         n = sc.nextInt();
         result = new int[n];
-        recur(0,0);
+        pac(0,0);
         System.out.println(cnt);
     }
-    static int cnt = 0;
-    private static void recur(int sum, int idx) {
 
+    private static void pac(int idx, int sum) {
         if (sum == n) {
             for (int i = 0; i < idx; i++) {
                 System.out.print(result[i]);
-                if( i != idx-1) System.out.print("+");
+                if(i != idx-1) System.out.print("+");
             }
             System.out.println();
             cnt++;
+        } else if (sum > n) {
+            return;
         } else {
-            int a;
-            if (idx == 0) a = n - 1;
-            else a = n - sum;
-            for (int i = a; i > 0 ; i--) {
+
+            for (int i = n-1; i > 0 ; i--) {
                 result[idx] = i;
-                if(idx > 0 && result[idx-1] < result[idx]) continue;
-                recur(sum + i, idx+1);
+                if(idx == 0) pac(idx + 1, sum + i);
+                else if(result[idx] <= result[idx-1]) pac(idx + 1, sum + i);
             }
         }
     }

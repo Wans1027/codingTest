@@ -3,61 +3,36 @@ package AlgorithmLABS.Prac;
 import java.util.*;
 
 public class Pract {
-    //Search Maze
-    // BFS를 이용한 최단 거리 경로 계산
-
-    static int[][] visited;
-    static int[][] map;
-    static Queue<int[]> q = new LinkedList<>();
     static int n;
-    static int m;
-
+    static int[] result;
+    static int cnt;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        cnt = 0;
         n = sc.nextInt();
-        m = sc.nextInt();
-        sc.nextLine();
-
-        map = new int[n][m];
-        visited = new int[n][m];
-
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                map[i][j] = sc.nextInt();
-                visited[i][j] = Integer.MAX_VALUE;
-            }
-        }
-
-        bfsSearch(n-1,0,0);
+        result = new int[n];
+        pac(0,0);
+        System.out.println(cnt);
     }
 
-    private static void bfsSearch(int x, int y, int cnt) {
+    private static void pac(int idx, int sum) {
+        if (sum == n) {
+            for (int i = 0; i < idx; i++) {
+                System.out.print(result[i]);
+                if(i != idx-1) System.out.print("+");
+            }
+            System.out.println();
+            cnt++;
+        } else if (sum > n) {
+            return;
+        } else {
 
-        q.add(new int[]{x, y, cnt});
-
-        while (!q.isEmpty()) {
-            int[] poll = q.poll();
-            x = poll[0];
-            y = poll[1];
-            cnt = poll[2];
-            try {
-                if (map[x][y] != 1) {
-
-                    if (cnt < visited[x][y]) {
-                        visited[x][y] = cnt;
-                    }else continue;
-                    cnt++;
-                    q.add(new int[]{x, y + 1, cnt});
-                    q.add(new int[]{x, y - 1, cnt});
-                    q.add(new int[]{x + 1, y, cnt});
-                    q.add(new int[]{x - 1, y, cnt});
-                }
-            } catch (Exception e) {
-                continue;
+            for (int i = n-1; i > 0 ; i--) {
+                result[idx] = i;
+                if(idx == 0) pac(idx + 1, sum + i);
+                else if(result[idx] <= result[idx-1]) pac(idx + 1, sum + i);
             }
         }
-        System.out.println(visited[0][m-1]);
     }
-
 
 }
