@@ -2,8 +2,8 @@ package SW_ExpertAcademy;
 
 public class GcdLCM {
     public static void main(String[] args) {
-        int num1 = 48;
-        int num2 = 60;
+        int num1 = 24;
+        int num2 = 14;
 
         int gcd = getGCD(num1, num2);
         System.out.println("the greatest common denominator : " + gcd);
