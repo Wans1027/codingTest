@@ -3,10 +3,7 @@ package Programmers;
 import java.util.Arrays;
 
 public class Test {
-    public String solution(String sentence) {
-        String answer = "";
-        char[] chars = sentence.toCharArray();
+    public static void main(String[] args) {
 
-        return answer;
     }
 }
