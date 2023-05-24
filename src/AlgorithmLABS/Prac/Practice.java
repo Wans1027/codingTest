@@ -5,48 +5,44 @@ import java.util.Queue;
 import java.util.Scanner;
 
 public class Practice {
-    static boolean[] visited;
-    static int[][] nodes;
-    static int n;
-    static Queue<Integer> q = new LinkedList<>();
-
+    //이진탐색
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-        int m = sc.nextInt();
-
-        nodes = new int[n][n];
-        visited = new boolean[n];
-        for (int i = 0; i < m; i++) {
-            int a = sc.nextInt();
-            int b = sc.nextInt();
-            nodes[a][b] = nodes[b][a] = 1;
-
-        }
-        dfs(0);
-    }
-
-    private static void dfs(int v) {
-        visited[v] = true;
-        System.out.print(v + " ");
+        int n = sc.nextInt();
+        int q = sc.nextInt();
+        int[] num = new int[n];
+        int[] ques = new int[q];
+        sc.nextLine();
         for (int i = 0; i < n; i++) {
-            if (!visited[i] && nodes[v][i] == 1) {
-                dfs(i);
-            }
+            num[i] = sc.nextInt();
         }
+        sc.nextLine();
+        for (int i = 0; i < q; i++) {
+            ques[i] = sc.nextInt();
+        }
+        for (int que : ques) {
+            bSearch(num, que, 0, num.length - 1);
+
+        }
+
     }
 
-    private static void bfs(int v) {
-        visited[v] = true;
-        q.add(v);
-        while (!q.isEmpty()) {
-            Integer poll = q.poll();
-            for (int i = 0; i < n; i++) {
-                if (!visited[i] && nodes[poll][i] == 1) {
-                    q.add(i);
-                    visited[i] = true;
-                }
+    private static void bSearch(int[] num, int q, int start, int end) {
+        if (start >= end) {
+            if (num[start] == q) {
+                System.out.println("YES");
+
             }
+            else System.out.println("NO");
+        }
+        else {
+            int mid = (start + end) / 2;
+
+            if (q == num[mid]) {
+                System.out.println("YES");
+            }
+            else if (q > num[mid]) bSearch(num, q, mid+1, end);
+            else if(q < num[mid]) bSearch(num, q, start, mid-1);
         }
     }
 }
