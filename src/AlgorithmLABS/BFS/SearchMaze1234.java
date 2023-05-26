@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class SearchMaze {
+public class SearchMaze1234 {
 
     static int[][] map;
     static int[][] visited;
@@ -38,7 +38,7 @@ public class SearchMaze {
     private static void bfs() {
         int cnt = 0;
         //좌,우,위,아래
-        int x = n-1;
+        int x = 0;
         int y = 0;
         //visited[x][y] = 1;
         q.add(new int[]{x, y, cnt});
@@ -49,7 +49,7 @@ public class SearchMaze {
             cnt = tmp[2];
             //if(a==0 && b == m-1) break;
             try {
-                if (map[a][b] != 1) {//벽이 아니라면
+                if (map[a][b] != 0) {//벽이 아니라면
 
 
                     if (cnt < visited[a][b]) {
@@ -74,6 +74,6 @@ public class SearchMaze {
                 continue;
             }
         }
-        System.out.println(visited[0][m-1]);
+        System.out.println(visited[n-1][m-1]);
     }
 }
