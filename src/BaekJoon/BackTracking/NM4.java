@@ -2,7 +2,7 @@ package BaekJoon.BackTracking;
 
 import java.util.Scanner;
 
-public class NM3 {
+public class NM4 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
@@ -24,7 +24,7 @@ public class NM3 {
             sb.append('\n');
         }
         else {
-            for (int i = 0; i < n; i++) {
+            for (int i = at; i < n; i++) {
                 result[x] = i+1;
                 nm3(i,x + 1);
             }

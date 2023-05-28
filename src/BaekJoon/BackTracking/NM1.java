@@ -1,9 +1,8 @@
-package BaekJoon;
-
+package BaekJoon.BackTracking;
 
 import java.util.Scanner;
 
-public class PracTest {
+public class NM1 {
     static int n,k;
     static boolean[] visited;
     static int[] result;
@@ -15,18 +14,16 @@ public class PracTest {
         result = new int[k];
 
         backTracking(0);
+        System.out.println(sb);
     }
 
+    static StringBuilder sb = new StringBuilder();
     private static void backTracking(int idx) {
         if (idx == k) {
             for (int i : result) {
-                System.out.print(i);
+                sb.append(i+" ");
             }
-            System.out.print(" ");
-            for (int i = 0; i < n; i++) {
-                if(visited[i]) System.out.print(i + 1);
-            }
-            System.out.println();
+            sb.append("\n");
             return;
         }
 
