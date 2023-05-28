@@ -1,24 +1,26 @@
 package BaekJoon;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class PracTest {
+    static Map<Integer, Integer> m;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int r = sc.nextInt();
-        System.out.println(fact(n)/(fact(r)*fact(n-r)));
-    }
-
-    private static int fact(int x){
-        if (x == 0 || x == 1) {
-            return 1;
-        }else return fact(x-1) * x;
-    }
-
-    private static int fact2(int a, int b) {
-        if(a == 1 || a == 0) return 1;
-        else if(a == b) return b;
-        else return fact2(a-1,b) * a;
+        m = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            int a = sc.nextInt();
+            m.put(a,m.getOrDefault(a,0)+1);
+        }
+        StringBuilder sb = new StringBuilder();
+        int k = sc.nextInt();
+        for (int i = 0; i < k; i++) {
+            int a = sc.nextInt();
+            int b = m.getOrDefault(a,0);
+            sb.append(b + " ");
+        }
+        System.out.println(sb);
     }
 }
