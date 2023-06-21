@@ -1,42 +1,53 @@
 package BaekJoon;
 
 
-import java.util.Scanner;
+import java.util.*;
 
 public class PracTest {
-    static int n,k;
-    static boolean[] visited;
-    static int[] result;
+    static int[][] map;
+    static int n,m;
+    static int[][] visit;
+    static Queue<int[]> q = new LinkedList<>();
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-        k = sc.nextInt();
-        visited = new boolean[n];
-        result = new int[k];
+         n = sc.nextInt();
+         m = sc.nextInt();
 
-        backTracking(0);
+        map = new int[n][m];
+        visit = new int[n][m];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j <m; j++) {
+                map[i][j] = sc.nextInt();
+                visit[i][j] = Integer.MAX_VALUE;
+            }
+        }
+        searchMaze(n-1,0);
     }
 
-    private static void backTracking(int idx) {
-        if (idx == k) {
-            for (int i : result) {
-                System.out.print(i);
+    private static void searchMaze(int x, int y) {
+        q.add(new int[]{x, y, 0});
+        visit[x][y] = 0;
+        while (!q.isEmpty()) {
+            int[] poll = q.poll();
+            int a = poll[0];
+            int b = poll[1];
+            int c = poll[2];
+            try {
+                if(map[a][b] == 0){
+                    if (visit[a][b] < c) {
+                        continue;
+                    }
+                    visit[a][b] = Math.min(visit[a][b], c);
+                    q.add(new int[]{a-1,b,c+1});
+                    q.add(new int[]{a+1,b,c+1});
+                    q.add(new int[]{a,b-1,c+1});
+                    q.add(new int[]{a,b+1,c+1});
+                }
+            } catch (Exception e) {
+                continue;
             }
-            System.out.print(" ");
-            for (int i = 0; i < n; i++) {
-                if(visited[i]) System.out.print(i + 1);
-            }
-            System.out.println();
-            return;
         }
 
-        for (int i = 0; i < n; i++) {
-            if (!visited[i]) {
-                visited[i] = true;
-                result[idx] = i+1;
-                backTracking(idx+1);
-                visited[i] = false;
-            }
-        }
+        System.out.println(visit[0][m-1]);
     }
 }
