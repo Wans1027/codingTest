@@ -1,14 +1,15 @@
 package BaekJoon2.BackTrack;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class StartLink {
     static int[][] map;
     static boolean[] visited;
     static int[] result;
     static int n;
+    static HashMap<Integer, Integer> m = new HashMap<>();
+    static LinkedList<Integer> q = new LinkedList<>();
+    static StringBuilder sb = new StringBuilder();
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
@@ -20,6 +21,7 @@ public class StartLink {
                 map[i][j] = sc.nextInt();
             }
         }
+
         backTrack(0,0);
         /*for (int i = 0; i < li.size()-1; i++) {
             for (int j = i+1; j < li.size(); j++) {
@@ -44,7 +46,6 @@ public class StartLink {
             teamScore();
             return;
         }
-
         for (int i = idx; i < n; i++) {
             if (!visited[i]) {
                 visited[i] = true;
