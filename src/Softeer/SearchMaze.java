@@ -21,9 +21,9 @@ public class SearchMaze {
             map[i] = a;
         }
 
-        searchMaze(n-1, 0);
-
-
+        //searchMaze(n-1, 0);
+        dfsMazeSearch(n-1, 0, 0);
+        System.out.println(visited[0][m-1]);
     }
 
     private static void searchMaze(int x, int y){
@@ -54,5 +54,27 @@ public class SearchMaze {
         }
 
         System.out.println(visited[0][m-1]-1);
+    }
+
+    private static void dfsMazeSearch(int a, int b, int c) {
+        visited[a][b] = c;
+        int[][] direction = new int[][]{{a + 1, b, c + 1}, {a - 1, b, c + 1}, {a, b + 1, c + 1}, {a, b - 1, c + 1}};
+        for (int[] dir : direction) {
+            int x = dir[0];
+            int y = dir[1];
+            int cnt = dir[2];
+            try {
+                if(map[x][y] == 0){
+                    if (visited[x][y] == 0 || visited[x][y] > cnt) {
+                        dfsMazeSearch(x,y,cnt);
+                    }
+                    else continue;
+
+                }
+            } catch (Exception e) {
+                //return;
+            }
+
+        }
     }
 }
