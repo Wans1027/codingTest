@@ -1,5 +1,6 @@
 package BaekJoon2.BackTrack;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class NM2 {
