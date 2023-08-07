@@ -11,8 +11,6 @@ public class RectangleArrangement {
 
         int[] result = new int[n + 1];
 
-
-
         for (int i = 1; i <= n; i++) {
             if(i<3) result[i] = i;
             else{

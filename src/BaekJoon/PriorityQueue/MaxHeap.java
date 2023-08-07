@@ -1,8 +1,6 @@
 package BaekJoon.PriorityQueue;
 
-import java.util.Collections;
-import java.util.PriorityQueue;
-import java.util.Scanner;
+import java.util.*;
 
 public class MaxHeap {
     static PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
